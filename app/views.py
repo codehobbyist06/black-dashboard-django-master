@@ -28,6 +28,9 @@ def index(request):
     context = {}
     context['segment'] = 'index'
     data = []
+    mydata = Data()
+    mydata.myList = data_list
+    mydata.save()
     if Data.objects.all().latest('id'):
         data = Data.objects.all().latest('id')
         print(data.myList)
