@@ -27,7 +27,9 @@ def index(request):
     
     context = {}
     context['segment'] = 'index'
-    data = Data.objects.all().latest('id')
+    data = []
+    if Data.objects.all().latest('id'):
+        data = Data.objects.all().latest('id')
     print(data.myList)
     
     context['data_list'] = data.myList
