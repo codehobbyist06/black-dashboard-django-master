@@ -30,9 +30,12 @@ def index(request):
     data = []
     if Data.objects.all().latest('id'):
         data = Data.objects.all().latest('id')
-    print(data.myList)
-    
-    context['data_list'] = data.myList
+        print(data.myList)
+
+    if data.myList:
+        context['data_list'] = data.myList
+    else:
+        context['data_list'] = data_list
 
     html_template = loader.get_template( 'index.html' )
     return HttpResponse(html_template.render(context, request))
