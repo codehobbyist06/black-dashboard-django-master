@@ -58,9 +58,9 @@
         <div class="card card-chart">
           <div class="card-header">
             <!-- <h5 class="card-category">Normal Range: </h5> -->
-            <h5 class="card-category">Systolic Pressure < 120mm Hg</h5>
-            <h5 class="card-category">Diastolic Pressure < 80mm Hg</h5>
-            <h3 class="card-title"><!-- <i class="tim-icons icon-bell-55 text-primary"></i> --> Blood Pressure</h3>
+            <h5 class="card-category">Normal Range:</h5>
+            <h5 class="card-category">60 to 100 bpm</h5>
+            <h3 class="card-title"><!-- <i class="tim-icons icon-bell-55 text-primary"></i> --> Heart Rate</h3>
           </div>
           <div class="card-body">
             <div class="chart-area">
@@ -644,7 +644,7 @@
     gradientStroke.addColorStop(0, 'rgba(119,52,169,0)'); //purple colors
 
     var data = {
-      labels: ['JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
+      labels: ['JUN','JUL', 'AUG', 'SEP', 'OCT', 'NOV'],
       datasets: [{
         label: "Data",
         fill: true,
@@ -660,7 +660,7 @@
         pointHoverRadius: 4,
         pointHoverBorderWidth: 15,
         pointRadius: 4,
-        data: [80, 100, 70, 80, 120, 80],
+        data: {{hr_data}},
       }]
     };
 
@@ -696,7 +696,7 @@
         pointHoverRadius: 4,
         pointHoverBorderWidth: 15,
         pointRadius: 4,
-        data: [90, 27, 60, 12, 80],
+        data: {{oxy_data}},
       }]
     };
 
@@ -711,8 +711,8 @@
 
     var chart_labels = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
     // var chart_data = [99,98,97,98,98,98,99,100,104,100,99,120];
-
-    var chart_data = {{data_list}};
+    // var chart_labels = {{temp_labels}};
+    var chart_data = {{temp_data}};
 
 
     var ctx = document.getElementById("chartBig1").getContext('2d');

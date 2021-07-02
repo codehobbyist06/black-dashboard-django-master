@@ -9,20 +9,30 @@ from django.template import loader
 from django.http import HttpResponse
 from django import template
 from app.models import Data
+from datetime import datetime
 
-data_list = [99,98,97,98,98,98,99,100,104,100,99,100]
+default_temp_list = [99,98,97,98,98,98,99,100,104,100,99,100]
+default_hr_list = [60,80,70,90,100,60]
+default_oxy_list = [95,96,95,96,97]
 
-# @login_required(login_url="/login/")
+# default_temp_labels = []
+# default_hr_labels = []
+# default_oxy_labels = []
+
 def get_data(request):
     data = json.loads(request.body)
-    mylist = data['data']
-    
+    temp_data = data['temp_data']
+    hr_data = data['hr_data']
+    oxy_data = data['oxy_data']
+
     mydata = Data()
-    mydata.myList = mylist
+    mydata.myList_temp = temp_data
+    mydata.myList_heartrate = hr_data
+    mydata.myList_oxygen = oxy_data
     mydata.save()
     return HttpResponse("<h1>Thank you</h1>")
 
-# @login_required(login_url="/login/")
+@login_required(login_url="/login/")
 def index(request):
     
     context = {}
@@ -30,12 +40,15 @@ def index(request):
     data = []
     if Data.objects.all().latest('id'):
         data = Data.objects.all().latest('id')
-        print(data.myList)
 
-    if data.myList:
-        context['data_list'] = data.myList
+    if data.myList_temp:
+        context['temp_data'] = data.myList_temp
+        context['hr_data'] = data.myList_heartrate
+        context['oxy_data'] = data.myList_oxygen
     else:
-        context['data_list'] = data_list
+        context['temp_data'] = default_temp_list
+        context['hr_data'] = default_hr_list
+        context['oxy_data'] = default_oxy_list
 
     html_template = loader.get_template( 'index.html' )
     return HttpResponse(html_template.render(context, request))
