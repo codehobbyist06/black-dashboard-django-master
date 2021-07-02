@@ -9,4 +9,10 @@ from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'core.settings')
 
+from app.models import Data
+
+mydata = Data()
+mydata.myList = [99,98,97,98,98,98,99,100,104,100,99,100]
+mydata.save()
+
 application = get_wsgi_application()
